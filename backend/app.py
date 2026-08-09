@@ -15,6 +15,9 @@ from property_database import PropertyDatabase
 from property_search import PropertySearch
 from property_matcher import PropertyMatcher
 from chat_service import ChatService
+import threading
+import time
+import urllib.request
 
 # Configure structured logging
 logging.basicConfig(
@@ -198,6 +201,23 @@ def get_user_favorites(user_id: int = 1):
         logger.error(f"Error fetching favorites: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+
+def keep_alive_ping():
+    """Background thread to ping the server every 14 minutes to prevent Render sleep."""
+    while True:
+        time.sleep(14 * 60)  # 14 minutes
+        try:
+            port = os.getenv("PORT", "8000")
+            urllib.request.urlopen(f"http://localhost:{port}/health", timeout=10)
+            logger.info("Keep-alive ping sent to /health to prevent Render sleep")
+        except Exception as e:
+            logger.error(f"Keep-alive ping failed: {e}")
+
+@app.on_event("startup")
+def startup_event():
+    logger.info("Starting keep-alive background thread...")
+    thread = threading.Thread(target=keep_alive_ping, daemon=True)
+    thread.start()
 
 if __name__ == "__main__":
     import uvicorn

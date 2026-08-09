@@ -17,6 +17,8 @@ export default function App() {
   const [marketInsight, setMarketInsight] = useState<string>('');
   const [isGeneratingInsight, setIsGeneratingInsight] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL || '';
+
   // Search state
   const [searchInput, setSearchInput] = useState('');
   const [selectedType, setSelectedType] = useState('');
@@ -25,7 +27,7 @@ export default function App() {
   // Fetch Dynamic Insight
   const fetchMarketInsight = (query: string) => {
     setIsGeneratingInsight(true);
-    fetch('/api/market-insight', {
+    fetch(`${API_URL}/api/market-insight`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: query, filters: {} })
@@ -46,7 +48,7 @@ export default function App() {
   // Load Initial Properties
   const fetchInitialProperties = useCallback(() => {
     setIsLoadingSearch(true);
-    fetch('/api/search', {
+    fetch(`${API_URL}/api/search`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: '', filters: {} })
@@ -64,7 +66,7 @@ export default function App() {
   }, []);
 
   const fetchFavorites = useCallback(() => {
-    fetch('/api/user/favorites')
+    fetch(`${API_URL}/api/user/favorites`)
       .then((res) => res.json())
       .then((data) => {
         if (data.favorites) {
@@ -84,7 +86,7 @@ export default function App() {
     
     // Convert selectedPrice back to standard filters if needed, 
     // or pass the raw query down. For now, doing a basic text query to the RAG backend.
-    fetch('/api/search', {
+    fetch(`${API_URL}/api/search`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: searchInput, filters: {} })
@@ -101,12 +103,13 @@ export default function App() {
   };
 
   const handleToggleFavorite = (propertyId: number) => {
-    if (favoriteIds.includes(propertyId)) {
-      fetch(`/api/favorites/${propertyId}`, { method: 'DELETE' })
+    const isFav = favoriteIds.includes(propertyId);
+    if (isFav) {
+      fetch(`${API_URL}/api/favorites/${propertyId}`, { method: 'DELETE' })
         .then(() => setFavoriteIds(favoriteIds.filter((id) => id !== propertyId)))
         .catch(console.error);
     } else {
-      fetch('/api/favorites', {
+      fetch(`${API_URL}/api/favorites`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ property_id: propertyId })
