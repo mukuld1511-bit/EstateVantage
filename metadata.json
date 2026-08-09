@@ -1,0 +1,6 @@
+{
+  "name": "Real Estate Agent RAG System",
+  "description": "Production-ready Real Estate RAG system with SQL property search, client matcher, market analytics, investment ROI calculator, and report generator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

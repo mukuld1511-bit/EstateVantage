@@ -1,0 +1,11 @@
+area,avg_price,price_trend,crime_rate,school_rating,demographics
+Downtown,780000,6.5,4.2,7.8,"Urban Professionals, Young Couples"
+Waterfront,2150000,8.2,1.8,9.1,"High-net-worth Retirees, Executives"
+Suburbs,680000,3.4,1.2,9.4,"Families with Children, Retirees"
+Tech Corridor,1020000,9.1,2.1,8.6,"Tech Workers, Young Families"
+Arts District,950000,4.8,3.5,7.2,"Artists, Entrepreneurs, Designers"
+Hillside,2800000,5.2,0.9,9.5,"Luxury Buyers, Executives"
+Financial District,1350000,3.8,2.8,8.2,"Finance Executives, Lawyers"
+Westside,710000,4.2,2.3,8.8,"Academics, Young Families"
+Midtown,1200000,5.9,2.5,8.9,"Established Families, Professionals"
+Northside,790000,2.1,1.9,8.5,"Suburban Families, Outdoor Enthusiasts"
