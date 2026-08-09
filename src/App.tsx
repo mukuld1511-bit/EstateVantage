@@ -4,7 +4,7 @@ import { Navbar } from './components/Navbar';
 import { PropertyCard } from './components/PropertyCard';
 import { PropertyDetail } from './components/PropertyDetail';
 import { ChatRAG } from './components/ChatRAG';
-import HalftoneReveal from './components/HalftoneReveal';
+import HalftoneReveal from './components/HalftoneReveal.tsx';
 import { FavoritesList } from './components/FavoritesList';
 
 export default function App() {
