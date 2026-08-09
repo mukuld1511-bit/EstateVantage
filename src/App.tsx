@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { PropertyCard } from './components/PropertyCard';
 import { PropertyDetail } from './components/PropertyDetail';
 import { ChatRAG } from './components/ChatRAG';
+import HalftoneReveal from './components/HalftoneReveal';
 import { FavoritesList } from './components/FavoritesList';
 
 export default function App() {
@@ -136,15 +137,21 @@ export default function App() {
         {activeTab === 'search' && (
           <>
             {/* Hero Section */}
-            <section className="relative h-[80vh] min-h-[600px] w-full bg-surface-container-lowest">
-              <div 
-                className="absolute inset-0 bg-cover bg-center w-full h-full"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop')" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-on-background/80 via-on-background/30 to-transparent"></div>
+            <section className="relative h-[80vh] min-h-[600px] w-full bg-surface-container-lowest overflow-hidden">
+              <div className="absolute inset-0 w-full h-full">
+                <HalftoneReveal
+                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"
+                  inkColor="#141414"
+                  paperColor="#f0f3ff"
+                  mode="color"
+                  dotDensity={110}
+                  angle={28}
+                  revealRadius={0.3}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent pointer-events-none"></div>
               </div>
               
-              <div className="absolute inset-0 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex items-end pb-24">
+              <div className="absolute inset-0 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex items-end pb-24 pointer-events-none">
                 <div className="max-w-2xl text-on-tertiary">
                   <p className="text-label-md font-label-md uppercase tracking-widest mb-4 opacity-90">Exclusive Listing</p>
                   <h1 className="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg mb-6 leading-tight">
@@ -153,7 +160,7 @@ export default function App() {
                   <p className="text-body-lg font-body-lg mb-8 opacity-90">
                     Experience unparalleled architectural elegance in this modernist masterpiece overlooking the Pacific.
                   </p>
-                  <button className="inline-flex items-center justify-center border border-on-tertiary text-on-tertiary px-8 py-3 rounded text-label-md font-label-md uppercase tracking-wider hover:bg-on-tertiary hover:text-primary-container transition-colors group cursor-pointer">
+                  <button className="inline-flex items-center justify-center border border-on-tertiary text-on-tertiary px-8 py-3 rounded text-label-md font-label-md uppercase tracking-wider hover:bg-on-tertiary hover:text-primary-container transition-colors group cursor-pointer pointer-events-auto">
                     Explore Property
                     <span className="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                   </button>
@@ -161,8 +168,39 @@ export default function App() {
               </div>
             </section>
 
+            {/* About Estate Vantage Section */}
+            <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-24 flex flex-col lg:flex-row gap-16 items-center">
+              <div className="flex-1 space-y-6">
+                <p className="text-label-md font-label-md uppercase tracking-widest text-primary mb-2">Our Philosophy</p>
+                <h2 className="text-display-sm font-display-sm text-on-surface">About Estate Vantage</h2>
+                <p className="text-body-lg text-secondary leading-relaxed">
+                  We curate the world's most exceptional properties. With an eye for architectural significance and uncompromising luxury, Estate Vantage connects discerning buyers with homes that transcend the ordinary. Experience the perfect blend of intelligent AI discovery and breathtaking visual exploration.
+                </p>
+                <button className="mt-4 border-b-2 border-primary text-primary pb-1 font-label-md uppercase tracking-wider hover:text-on-surface hover:border-on-surface transition-colors cursor-pointer">
+                  Discover More
+                </button>
+              </div>
+              
+              <div className="flex-1 flex flex-col sm:flex-row gap-6 w-full h-[500px]">
+                <div className="w-full sm:w-1/2 h-full rounded-2xl overflow-hidden relative group shadow-lg border border-outline-variant">
+                  <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Luxury Interior" />
+                </div>
+                <div className="w-full sm:w-1/2 h-full rounded-2xl overflow-hidden relative shadow-lg border border-outline-variant">
+                  <HalftoneReveal
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop"
+                    inkColor="#141414"
+                    paperColor="#f0f3ff"
+                    mode="mono"
+                    dotDensity={90}
+                    angle={28}
+                    revealRadius={0.28}
+                  />
+                </div>
+              </div>
+            </section>
+
             {/* Quick Search Bar */}
-            <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop -mt-8 relative z-10 w-full">
+            <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10 w-full mb-12">
               <div className="bg-surface-container-lowest shadow-sm rounded-lg p-6 border border-outline-variant flex flex-col md:flex-row gap-4 items-center justify-between">
                 
                 <div className="flex-1 w-full relative">
